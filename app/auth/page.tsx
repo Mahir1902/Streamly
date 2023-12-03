@@ -1,20 +1,70 @@
 "use client";
 
 import Input from "@/components/Input";
-import { use, useCallback, useState } from "react";
+import axios from "axios";
+import { useCallback, useState } from "react";
+import {signIn} from 'next-auth/react'
+import { useRouter } from "next/navigation";
+
 
 type Props = {};
 
 export default function page({}: Props) {
+  const router = useRouter()
   const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
+  const [name, setName] = useState("");
   const [password, setPassword] = useState("");
 
   const [varient, setVarient] = useState('login')
 
+  //We do not want this function to be recreated everytime our page reloads
   const toggleVarient = useCallback(() => {
     setVarient((currentVarient) => currentVarient === 'login' ? 'register' : 'login' )
   }, [])
+
+
+  const login = useCallback(async () => {
+
+    
+
+    try {
+
+      const result = await signIn('credentials', {
+        email,
+        password,
+        redirect:false,
+        callbackUrl:'/'
+      })
+
+      if(result?.ok) router.push('/')
+      else console.log('Login failed', result?.error);
+      
+      
+    } catch (error) {
+      console.log(error);
+      
+    }
+
+  },[email, password, router])
+
+
+  //Register fucntion to send data to the register route
+  const register = useCallback(async () => {
+    try {
+      await axios.post('api/auth/register', {
+        name,
+        email,
+        password
+      })
+
+      login()
+    } catch (error) {
+      console.log(error);
+      
+    }
+  }, [email, name, password, login])
+
+  
 
   return (
     <div className='bg-[url("/images/hero.jpg")] relative h-full w-full bg-no-repeat bg-cover bg-fixed'>
@@ -32,10 +82,10 @@ export default function page({}: Props) {
               <Input
                 lable="Username"
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  setUsername(e.target.value)
+                  setName(e.target.value)
                 }
-                id="username"
-                value={username}
+                id="name"
+                value={name}
               />)}
               <Input
                 lable="Email"
@@ -52,9 +102,10 @@ export default function page({}: Props) {
                 }
                 id="password"
                 value={password}
+                type="password"
               />
             </div>
-            <button className='
+            <button onClick={varient === 'login' ? login : register} className='
               bg-purple-600
               py-3
               rounded-md
