@@ -6,6 +6,11 @@ type Props = {
 }
 
 export default function layout({children}: Props) {
+
+
+  
+
+
   return (
     <div className="h-screen relative w-screen flex flex-col md:items-center md:justify-center">
         <h1 className='absolute text-orange text-6xl font-bold left-10 top-6'>STREAMLY</h1>

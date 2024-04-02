@@ -3,10 +3,26 @@ import React from 'react'
 import { Input } from '@/components/ui/input'
 import Link from 'next/link'
 import { FaGithub, FaGoogle } from "react-icons/fa";
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/app/utils/auth';
+import { redirect } from 'next/navigation';
+import GitHub from '@/components/authButtons/GitHub';
+import Google from '@/components/authButtons/Google';
+
+
 
 type Props = {}
 
-export default function page({}: Props) {
+export default async function page({}: Props) {
+
+  const session = await getServerSession(authOptions)
+
+    if(session) {
+        return redirect('/home')
+    }
+
+
+
   return (
     <div className='bg-black/80 py-10 px-6 mt-24 rounded md:mt-0 md:max-w-sm md:px-14'>
         <form action="">
@@ -21,12 +37,9 @@ export default function page({}: Props) {
         </div>
 
         <div className='mt-6 flex justify-center gap-3 items-center'>
-          <Button variant={'outline'} size={'icon'}>
-              <FaGithub className='text-white w-5 h-5'/>
-          </Button>
-          <Button variant={'outline'} size={'icon'}>
-              <FaGoogle className='text-white w-5 h-5'/>
-          </Button>
+          <GitHub/>
+          <Google/>
+
         </div>
     </div>
   )
