@@ -5,6 +5,9 @@ import { Button } from "./ui/button";
 import { FaPlay } from "react-icons/fa6";
 import { Heart } from "lucide-react";
 import VideoModal from "./VideoModal";
+import { addToWatchlist, removeFromWatchlist } from "@/app/actions";
+import { usePathname } from "next/navigation";
+import path from "path";
 
 type MovieCardProps = {
   title: string;
@@ -31,6 +34,8 @@ export default function MovieCard({
 }: MovieCardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const pathname = usePathname();
+
   return (
     <>
       <button onClick={() => setIsModalOpen(true)}>
@@ -39,13 +44,17 @@ export default function MovieCard({
 
       <div className="absolute right-5 top-5">
         {wathcList ? (
-          <form>
+          <form action={removeFromWatchlist}>
+            <input type="hidden" name="watchlistId" value={watchListId} />
+            <input type="hidden" name='pathname' value={pathname} />
             <Button variant={"outline"} size={"icon"}>
               <Heart className="w-4 h-4 text-red-500" />
             </Button>
           </form>
         ) : (
-          <form>
+          <form action={addToWatchlist}>
+            <input type="hidden" name='movieId' value={movieId} />
+            <input type="hidden" name='pathname' value={pathname} />
             <Button variant={"outline"} size={"icon"}>
               <Heart className="w-4 h-4 text-white" />
             </Button>

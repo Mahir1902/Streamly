@@ -60,7 +60,7 @@ model Movie {
   overview    String
   releaseDate Int
   videoSource String
-  category    String
+  category    String[]
   youtubeString String
   WatchLists  WatchList[]
 

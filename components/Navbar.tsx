@@ -22,15 +22,15 @@ const links: linkProps[] = [
     },
     {
         name: "Movies",
-        href: 'home/movies'
+        href: '/home/movies'
     },
     {
         name: 'Recently Added',
-        href: 'home/recent'
+        href: '/home/recent'
     }, 
     {
         name: 'My List',
-        href: 'home/user/list'
+        href: '/home/user/list'
     }
 ]
 

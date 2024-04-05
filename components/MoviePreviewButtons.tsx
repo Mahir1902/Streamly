@@ -35,7 +35,7 @@ export default function MoviePreviewButtons({
         <PlayCircle className="mr-2 h-6 w-6" /> Play
       </Button>
       <Button
-        className="text-lg font-medium bg-white/40 hover:bg-white/30 text-white"
+        className="text-lg font-medium bg-orange/40 hover:bg-orange/30 text-white"
         onClick={() => setIsDialogOpen(true)}
       >
         <InfoIcon className="mr-2 h-6 w-6" /> Learn More
