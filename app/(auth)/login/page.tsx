@@ -29,7 +29,7 @@ export default async function page({}: Props) {
           </div>
         </form>
         <div className='text-gray-500 font-medium text-sm mt-2'>
-          Don't have an account? <Link href={'/register'} className='text-white hover:underline '>Sign up here!</Link>
+          Do not have an account? <Link href={'/register'} className='text-white hover:underline '>Sign up here!</Link>
         </div>
 
         <div className='mt-6 flex justify-center gap-3 items-center'>
