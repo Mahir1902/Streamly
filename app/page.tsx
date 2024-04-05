@@ -1,6 +1,6 @@
 import { getServerSession } from "next-auth";
 import Image from "next/image";
-import { authOptions } from "./utils/auth";
+import { authOptions } from "../utils/auth";
 import { redirect } from "next/navigation";
 
 

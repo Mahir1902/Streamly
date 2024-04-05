@@ -4,7 +4,7 @@ import { Input } from '@/components/ui/input'
 import Link from 'next/link'
 import { FaGithub, FaGoogle } from "react-icons/fa";
 import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/utils/auth';
+import { authOptions } from '@/utils/auth';
 import { redirect } from 'next/navigation';
 import GitHub from '@/components/authButtons/GitHub';
 import Google from '@/components/authButtons/Google';

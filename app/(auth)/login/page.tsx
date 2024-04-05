@@ -4,7 +4,7 @@ import { Input } from '@/components/ui/input'
 import Link from 'next/link'
 import GitHub from '@/components/authButtons/GitHub';
 import Google from '@/components/authButtons/Google';
-import { authOptions } from '@/app/utils/auth';
+import { authOptions } from '@/utils/auth';
 import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
 
