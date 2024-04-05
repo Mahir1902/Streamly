@@ -1,7 +1,10 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import { Button } from "./ui/button";
 import { FaPlay } from "react-icons/fa6";
 import { Heart } from "lucide-react";
+import VideoModal from "./VideoModal";
 
 type MovieCardProps = {
   title: string;
@@ -9,10 +12,10 @@ type MovieCardProps = {
   movieId: number;
   wathcList: boolean;
   watchListId: string;
-  yotubeUrl: string;
+  youtubeUrl: string;
   year: number;
-  age: number,
-  duration:number
+  age: number;
+  duration: number;
 };
 
 export default function MovieCard({
@@ -21,38 +24,59 @@ export default function MovieCard({
   movieId,
   watchListId,
   wathcList,
-  yotubeUrl,
+  youtubeUrl,
   year,
   age,
-  duration
+  duration,
 }: MovieCardProps) {
-  return <>
-    
-    <button>
-        <FaPlay className="h-12 w-12 text-gray-200"/>
-    </button>
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-    <div className="absolute right-5 top-5">
-        {wathcList ? <form>
-            <Button variant={'outline'} size={'icon'}>
-                <Heart className="w-4 h-4 text-red-500"/>
+  return (
+    <>
+      <button onClick={() => setIsModalOpen(true)}>
+        <FaPlay className="h-12 w-12 text-gray-200" />
+      </button>
+
+      <div className="absolute right-5 top-5">
+        {wathcList ? (
+          <form>
+            <Button variant={"outline"} size={"icon"}>
+              <Heart className="w-4 h-4 text-red-500" />
             </Button>
-        </form> : <form>
-        <Button variant={'outline'} size={'icon'}>
-                <Heart className="w-4 h-4 text-white"/>
+          </form>
+        ) : (
+          <form>
+            <Button variant={"outline"} size={"icon"}>
+              <Heart className="w-4 h-4 text-white" />
             </Button>
-        </form> }
-    </div>
-        
-    <div className="absolute bottom-0 text-white p-5 left-0">
+          </form>
+        )}
+      </div>
+
+      <div className="absolute bottom-0 text-white p-5 left-0">
         <h1 className="font-bold line-clamp-1 text-lg">{title}</h1>
         <div className="flex gap-x-2 items-center">
-            <p className="font-normal text-sm">{year}</p>
-            <p className="font-normal border border-gray-200 rounded text-sm py-0.5 px-1">{age}+</p>
-            <p className="font-normal text-sm">{duration}h</p>
+          <p className="font-normal text-sm">{year}</p>
+          <p className="font-normal border border-gray-200 rounded text-sm py-0.5 px-1">
+            {age}+
+          </p>
+          <p className="font-normal text-sm">{duration}h</p>
         </div>
-        <p className="line-clamp-1 text-sm text-gray-200 font-light">{overview}</p>
-    </div>
-
-  </>
+        <p className="line-clamp-1 text-sm text-gray-200 font-light">
+          {overview}
+        </p>
+      </div>
+      <VideoModal
+        youtubeUrl={youtubeUrl}
+        key={movieId}
+        title={title}
+        overview={overview}
+        state={isModalOpen}
+        changeState={setIsModalOpen}
+        releaseDate={year}
+        duration={duration}
+        age={age}
+      />
+    </>
+  );
 }

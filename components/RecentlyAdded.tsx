@@ -53,7 +53,7 @@ export default async function RecentlyAdded() {
                 movieId={movie.id}
                 title={movie.title}
                 overview={movie.overview}
-                yotubeUrl={movie.youtubeString}
+                youtubeUrl={movie.youtubeString}
                 watchListId={movie.WatchLists[0]?.id}
                 wathcList={movie.WatchLists.length > 0 ? true : false}
                 age={movie.age}
